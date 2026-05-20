@@ -13,10 +13,9 @@ const crowdRoutes = require("./routes/crowdRoutes");
 const app = express();
 
 const server = http.createServer(app);
-
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "*", // Allows your Vercel site to connect securely
     methods: ["GET", "POST"],
   },
 });
@@ -47,11 +46,11 @@ io.on("connection", (socket) => {
     console.log("User Disconnected");
   });
 });
-
 const PORT = process.env.PORT || 5000;
 
-server.listen(PORT, () => {
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
   console.log(
     `Server running on port ${PORT}`
   );
-});

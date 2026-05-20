@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-
 import { io } from "socket.io-client";
-
 import API from "../services/api";
-
 import StatsCards from "../components/StatsCards";
-
 import AlertBanner from "../components/AlertBanner";
 
-const socket = io("http://localhost:5000");
+// Dynamically use your live backend URL if deployed, or fallback to localhost
+const BACKEND_URL = import.meta.env.PROD 
+  ? "https://vercel.com/vasundhara-devi-s-projects/crowd-predictor-ai/crowd-predictor-ai.vercel.app"  // 👈 REPLACE THIS STRING WITH YOUR LIVE RENDER/RAILWAY URL
+  : "http://localhost:5000";
+
+const socket = io(BACKEND_URL, {
+  transports: ["websocket", "polling"]
+});
 
 function Dashboard() {
   const [reports, setReports] = useState([]);
@@ -70,7 +73,6 @@ function Dashboard() {
 
       <StatsCards reports={reports} />
 
-      
       <input
         type="text"
         placeholder="Search by location..."
@@ -141,7 +143,7 @@ function Dashboard() {
 
                 <p className="mb-3">
                   <span className="font-semibold">
-                    Reported By:
+                    Report By:
                   </span>{" "}
                   {report.reportedBy?.name}
                 </p>
