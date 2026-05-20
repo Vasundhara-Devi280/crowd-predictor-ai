@@ -3,10 +3,8 @@ import { io } from "socket.io-client";
 import API from "../services/api";
 import StatsCards from "../components/StatsCards";
 import AlertBanner from "../components/AlertBanner";
-
-// Dynamically use your live backend URL if deployed, or fallback to localhost
 const BACKEND_URL = import.meta.env.PROD 
-  ? "https://vercel.com/vasundhara-devi-s-projects/crowd-predictor-ai/crowd-predictor-ai.vercel.app"  // 👈 REPLACE THIS STRING WITH YOUR LIVE RENDER/RAILWAY URL
+  ? "https://crowd-predictor-ai.onrender.com"  
   : "http://localhost:5000";
 
 const socket = io(BACKEND_URL, {
