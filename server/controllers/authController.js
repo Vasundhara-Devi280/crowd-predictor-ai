@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../models/user.js"; // 👈 Changed from 'User.js' to 'user.js' to match your exact filename
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
