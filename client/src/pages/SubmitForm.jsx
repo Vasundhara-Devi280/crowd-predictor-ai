@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
 
-function ReportForm() {
+function SubmitForm() {
   const [formData, setFormData] = useState({
     location: "",
     transportType: "",
