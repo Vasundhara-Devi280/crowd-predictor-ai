@@ -118,4 +118,4 @@ function SubmitForm() {
   );
 }
 
-export default ReportForm;
+export default SubmitForm;
