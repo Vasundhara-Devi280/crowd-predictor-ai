@@ -1,11 +1,5 @@
-const CrowdReport = require(
-  "../models/CrowdReport"
-);
-
-const createCrowdReport = async (
-  req,
-  res
-) => {
+import CrowdReport from "../models/crowdReport.js"; 
+export const createCrowdReport = async (req, res) => { 
   try {
     const {
       location,
@@ -15,65 +9,44 @@ const createCrowdReport = async (
       longitude,
     } = req.body;
 
-    const report =
-      await CrowdReport.create({
-        location,
-        transportType,
-        crowdLevel,
-        latitude,
-        longitude,
-        reportedBy: req.user.id,
-      });
+    const report = await CrowdReport.create({
+      location,
+      transportType,
+      crowdLevel,
+      latitude,
+      longitude,
+      reportedBy: req.user.id,
+    });
 
-    const populatedReport =
-      await report.populate(
-        "reportedBy",
-        "name"
-      );
+    const populatedReport = await report.populate(
+      "reportedBy",
+      "name"
+    );
 
     const io = req.app.get("io");
+    io.emit("newCrowdReport", populatedReport);
 
-    io.emit(
-      "newCrowdReport",
-      populatedReport
-    );
-
-    res.status(201).json(
-      populatedReport
-    );
+    res.status(201).json(populatedReport);
   } catch (error) {
     console.log(error);
-
     res.status(500).json({
-      message:
-        "Failed to create report",
+      message: "Failed to create report",
     });
   }
 };
 
-const getCrowdReports = async (
-  req,
-  res
-) => {
+export const getCrowdReports = async (req, res) => { // 👈 Prefixed with export
   try {
-    const reports =
-      await CrowdReport.find().populate(
-        "reportedBy",
-        "name"
-      );
+    const reports = await CrowdReport.find().populate(
+      "reportedBy",
+      "name"
+    );
 
     res.json(reports);
   } catch (error) {
     console.log(error);
-
     res.status(500).json({
-      message:
-        "Failed to fetch reports",
+      message: "Failed to fetch reports",
     });
   }
-};
-
-module.exports = {
-  createCrowdReport,
-  getCrowdReports,
 };
