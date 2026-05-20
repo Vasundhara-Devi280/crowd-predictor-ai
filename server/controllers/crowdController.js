@@ -1,4 +1,4 @@
-import CrowdReport from "../models/crowdReport.js"; 
+import CrowdReport from "../models/CrowdReport.js"; 
 export const createCrowdReport = async (req, res) => { 
   try {
     const {
