@@ -4,9 +4,8 @@ import { io } from "socket.io-client";
 
 import API from "../services/api";
 
-import CrowdChart from "../components/CrowdChart";
 import StatsCards from "../components/StatsCards";
-import CrowdMap from "../components/CrowdMap";
+
 import AlertBanner from "../components/AlertBanner";
 
 const socket = io("http://localhost:5000");
@@ -71,10 +70,7 @@ function Dashboard() {
 
       <StatsCards reports={reports} />
 
-      <CrowdChart reports={reports} />
-
-      <CrowdMap reports={reports} />
-
+      
       <input
         type="text"
         placeholder="Search by location..."
