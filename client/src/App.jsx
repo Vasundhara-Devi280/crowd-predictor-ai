@@ -7,7 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import ReportForm from "./pages/SubmitForm";
+import SubmitForm from "./pages/SubmitForm";
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
           path="/report"
           element={
             <ProtectedRoute>
-              <ReportForm />
+              <SubmitForm/>
             </ProtectedRoute>
           }
         />
