@@ -15,10 +15,8 @@ function SubmitForm() {
       (position) => {
         setFormData((prev) => ({
           ...prev,
-          latitude:
-            position.coords.latitude,
-          longitude:
-            position.coords.longitude,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
         }));
       },
       (error) => {
@@ -30,8 +28,7 @@ function SubmitForm() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]:
-        e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -39,8 +36,7 @@ function SubmitForm() {
     e.preventDefault();
 
     try {
-      const token =
-        localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
       await API.post(
         "/crowd",
@@ -55,7 +51,6 @@ function SubmitForm() {
       alert("Crowd report submitted");
     } catch (error) {
       console.log(error);
-
       alert("Submission failed");
     }
   };
@@ -71,44 +66,41 @@ function SubmitForm() {
           <input
             type="text"
             name="location"
+            value={formData.location}
             placeholder="Enter Location"
             onChange={handleChange}
             className="w-full p-3 border rounded-xl mb-4"
+            required
           />
 
           <input
             type="text"
             name="transportType"
-            placeholder="Transport Type"
+            value={formData.transportType}
+            placeholder="Transport Type (e.g., Train, Bus)"
             onChange={handleChange}
             className="w-full p-3 border rounded-xl mb-4"
+            required
           />
 
           <select
             name="crowdLevel"
+            value={formData.crowdLevel}
             onChange={handleChange}
             className="w-full p-3 border rounded-xl mb-6"
+            required
           >
             <option value="">
               Select Crowd Level
             </option>
-
-            <option value="Low">
-              Low
-            </option>
-
-            <option value="Medium">
-              Medium
-            </option>
-
-            <option value="High">
-              High
-            </option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
           </select>
 
           <button
             type="submit"
-            className="w-full bg-black text-white py-3 rounded-xl"
+            className="w-full bg-black text-white py-3 rounded-xl hover:bg-gray-800 transition font-bold"
           >
             Submit
           </button>
@@ -117,5 +109,4 @@ function SubmitForm() {
     </div>
   );
 }
-
 export default SubmitForm;
